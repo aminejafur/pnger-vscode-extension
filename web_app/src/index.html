@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+  <!-- loading indicator -->
+  <div id="loading">
+    <i class="fas fa-cog fa-spin"></i>
+  </div>
+  <div class="phone">
+    <!-- title -->
+    <div class="phone__container phone__banner">
+      <h1 class="phone__banner--title">
+        <%= htmlWebpackPlugin.options.bannertitle %>
+      </h1>
+      <i onclick="toggleFullScreen(this)" class="fa fa-expand  phone__banner--icon" aria-hidden="true"></i>
+    </div>
+    <!-- container -->
+    <div class="phone__container">
+      <div class="phone__main">
+        <!-- HELP -->
+        <div class="phone__main__help">
+          <i class="phone__main__help--icon fas fa-cog"></i>
+          <div>
+            <h2>Configuration</h2>
+            <p>
+              <!-- find more at : https://medium.com/@Carmichaelize/enabling-the-microphone-camera-in-chrome-for-local-unsecure-origins-9c90c3149339 -->
+              To allow <b>PNGER</b> from accessing your
+              camera please click on the link bellow. <a target="_blank"
+                href="https://medium.com/@Carmichaelize/enabling-the-microphone-camera-in-chrome-for-local-unsecure-origins-9c90c3149339">
+                Why should i do this ? </a><br>
+              <a onclick="copyLink(this)" href="#">chrome://flags/#unsafely-treat-insecure-origin-as-secure</a>.
+            </p>
+          </div>
+        </div>
+        <div class="phone__main__help">
+          <i class="phone__main__help--icon fas fa-camera"></i>
+          <div>
+            <h2>Take your picture</h2>
+            <p>Press the <b>(+)</b> bellow icon to take your shot, then choose your background removal
+              method.<br><b>(Make sure you provided an API in the extension settings)</b></p>
+          </div>
+        </div>
+        <div class="phone__main__help">
+          <i class="phone__main__help--icon fas fa-cloud-upload-alt"></i>
+          <div>
+            <h2>Save</h2>
+            <p>Once your background is succefully removed, a modal will show asking for saving destination and image
+              name.</p>
+          </div>
+        </div>
+      </div>
+      <!-- info page -->
+      <div class="phone__page" id="info">
+        <div class="phone__page__container">
+          <!-- <i class="fas fa-info-circle"></i> -->
+          <img src="<%=require('./img/ex_icon.png').default%>">
+          <p>
+            PNGER is an extension to make images integration and background removal easier than ever!
+            <br>
+            <br>
+            It started as a Weekend Project to write my first VScode extension and understand the concepts for building
+            extensions,
+            It's idea is to make it easier for designers to integrate images directly from their cameras to their projects
+            with a background removal feature.
+            <br>
+            <br>
+            Find more about this extension in my <a href="www.github.com/aminejafur"><b>Github</b></a>.<br>
+            Or you can contact me using my <a href="mailto:amine.jafur@gmail.com"><b>email</b></a>.
+          </p>
+        </div>
+      </div>
+      <!-- camera page -->
+      <div class="phone__page" id="camera">
+        <video id="video" autoplay></video>
+        <div id="viewfinder">
+          <div id="dot"></div>
+        </div>
+        <div class="phone__page__ranges">
+          <input type="range" name="width_slider" id="width_slider" min="2" max="100" step="0.5" value="2"
+            oninput="updateViewfinder()" />
+
+          <input type="range" name="height_slider" id="height_slider" min="2" max="50" step="0.5" value="2"
+            oninput="updateViewfinder()" />
+        </div>
+      </div>
+      <!-- showcase -->
+      <div class="phone__page" id="showcase">
+        <div class="phone__page__container">
+          <div class="phone__page__container--holder">
+            <canvas id="canvas"></canvas>
+          </div>
+          <div class="phone__page__container__options">
+            <div id="send_picture" class="phone__page__container__options--btn">
+              <i class="phone__main__help--icon fas fa-robot"></i>
+            </div>
+            <div onclick="alert('Green screen removal :\nWill be available in next update.')"
+              class="phone__page__container__options--btn">
+              <i class="phone__main__help--icon fas fa-braille"></i>
+            </div>
+            <div id="close_showcase" class="phone__page__container__options--btn">
+              <i class="phone__main__help--icon fas fa-times"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- image infos -->
+      <div class="phone__page phone__page__modal" id="modal">
+        <div class="phone__page__modal--modal">
+          <h2>Image succefully croped</h2>
+          <br />
+          <label for="name">Please choose a name for your image :</label>
+          <input type="text" name="name" id="filename" value="filename" />
+          <small>Don't type extension since it's png by default</small>
+          <br />
+          <label for="folder">Please choose a folder to store image :</label>
+          <select name="folder" id="folder"></select>
+          <small>If the select is empty, it means that none of these fodlers has
+            been found "assets,img,images..."</small>
+          <div class="phone__page__modal--modal__actions">
+            <div id="modal_submit" class="phone__page__modal--modal__actions--btn">
+              <i class="phone__page__modal--modal__actions--btn-icon fas fa-check"></i>
+            </div>
+            <div id="modal_close" class="phone__page__modal--modal__actions--btn">
+              <i class="phone__page__modal--modal__actions--btn-icon fas fa-door-open"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- navigation-bar -->
+    <div class="navigation-bar">
+      <a goto="home" class="navigation-bar__item navigation-bar__item--current">
+        <i class="fas fa-question-circle"></i>
+      </a>
+      <a goto="camera" class="navigation-bar__fab">
+        <i class="fa fas fa-plus"></i>
+        <i class="fa fa-camera"></i>
+      </a>
+      <a goto="info" class="navigation-bar__item">
+        <i class="fas fa-info-circle"></i>
+      </a>
+    </div>
+  </div>
+</body>
+
+</html>

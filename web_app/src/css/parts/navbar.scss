@@ -1,0 +1,72 @@
+.navigation-bar {
+  display: flex;
+  width: 100%;
+  padding: 16px 0;
+  justify-content: space-between;
+  font-size: 26px;
+  box-shadow: 0px 3px 30px 10px #f98f8f;
+  background-image: radial-gradient(
+    circle at center 6px,
+    transparent 36px,
+    #ffffff 36px
+  );
+  box-shadow: 0px 3px 30px 10px grey;
+  // position: absolute;
+  // bottom: 0;
+  z-index: 999;
+  &__item {
+    color: $primary-color;
+    opacity: 0.6;
+    padding: 0 15px;
+    &:active {
+      opacity: 1;
+    }
+    &--current {
+      opacity: 1;
+    }
+  }
+  &__fab {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    bottom: 28px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    color: $icons-color;
+    background-color: $primary-color;
+    opacity: 0.8;
+    box-shadow: $fab-shadow;
+    border-radius: 50%;
+    z-index: 999;
+    // positions
+    i {
+      position: absolute;
+    }
+    // default icon
+    i:first-of-type {
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    // camera
+    i:last-of-type {
+      transition: opacity 0.3s, transform 0.3s;
+      transform: rotate(-180deg) scale(0.5);
+      opacity: 0;
+    }
+    &.capture {
+      transform: scale(1.1);
+      // box-shadow: 20px 15px rgba(0, 0, 0, 0.15);
+      i:last-of-type {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+      }
+      i:first-of-type {
+        transform: rotate(180deg) scale(0.5);
+        opacity: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+$primary-color: #ad3232;
+$green-button: #3b6e45;
+$bleu-button: #233d4d;
+$icons-color: #fff;
+// top banner
+$top-banner-shadow: inset 0px 10px #bc5a5a;
+$top-banner-color: #fff;
+// body
+$body-bg-color: rgb(245, 245, 245);
+$body-font: "Roboto", "sans-serif";
+$body-font-size: 14px;
+$body-fore-color: rgba(0, 0, 0, 0.65);
+// navigation-bar
+$fab-shadow: 0px 3px 12px rgba(0, 0, 0, 0.08), 0px 3px 6px rgba(0, 0, 0, 0.12);
+// main page
+$help-title-color: #177e89;
+// camera
+$viewfinder-color: gray;
+$ranges-circle: #3b6e45;
+$ranges-bg-color: #6f2525;
+// font awsome fonts path
+$fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts";
+
+// global mixin
+@mixin icons-style {
+  position: relative;
+  background-color: $primary-color;
+  color: $icons-color;
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 5px black;
+  border: 5px solid white;
+  flex-shrink: 0;
+}
+
+@mixin icon-clicked {
+  box-shadow: 0px -1px 5px black;
+  transform: translateY(2px);
+}
+
+// // Uncomment to try another theme
+// $primary-color: #492c1d;
+// $green-button: #5b5750;
+// $bleu-button: #7c99b4;
+// $ranges-circle: #3a7d44;
+// $ranges-bg-color: #254d32;
+// $top-banner-shadow: inset 0px 10px #5b5750;
+
+// global style
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $body-font;
+  font-size: $body-font-size;
+  background-color: $body-bg-color;
+  color: $body-fore-color;
+}
+// disable mouse events on icons
+i {
+  pointer-events: none;
+}
+// loading indicator style
+#loading {
+  background: #fff;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: 9999;
+  opacity: 0.5;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  i {
+    font-size: 8em;
+  }
+}
+// import
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/solid";
+@import "../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
+@import "parts/**/*";

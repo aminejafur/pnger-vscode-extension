@@ -74,7 +74,7 @@ Issue        | Solution
 
 * Release date: 07-02-2021
 
-Please refer to the `CHANGELOG` for more informations.
+Please refer to the [`CHANGELOG`](https://github.com/aminejafur/pnger-vscode-extension/blob/main/extension/CHANGELOG.md) for more informations.
 
 
 ## Quick start
@@ -89,7 +89,7 @@ Start with :
 
 <!-- ## Code source -->
 
-Github : [https://github.com/aminejafur/pnger-vscode-extension](https://github.com/aminejafur/pnger-vscode-extension)
+Marketplace : [https://marketplace.visualstudio.com/items?itemName=aminejafur.pnger](https://marketplace.visualstudio.com/items?itemName=aminejafur.pnger)
 
 <!-- ## My email :  -->
 

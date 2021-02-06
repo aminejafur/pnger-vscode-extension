@@ -30,6 +30,7 @@ export default class Remove {
    * Remove green screen from image
    */
   nativeRemove() {
+    // chroma removing process
     console.log("nativeRemove");
   }
 }

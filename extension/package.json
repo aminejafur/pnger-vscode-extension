@@ -1,0 +1,80 @@
+{
+	"name": "pnger",
+	"displayName": "PNGER",
+	"description": "An extension to make images integration and background removal easier than ever!",
+	"icon": "media/ex_icon.png",
+	"publisher": "aminejafur",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/aminejafur/pnger-vscode-extension"
+	},
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.51.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./src/extension.js",
+	"contributes": {
+		"configuration": {
+			"title": "PNGER",
+			"properties": {
+				"pnger.RemoveBgApi": {
+					"type": "string",
+					"default": null,
+					"markdownDescription": "Please provide the `remove.bg` API key that will be used, you can get one from [Remove.bg](https://remove.bg)"
+				},
+				"pnger.Folders": {
+					"type": "string",
+					"default": "img,images,assets",
+					"markdownDescription": "PNGER will look for mentioned names in root folder and subfolders to provide them as options to save your image on."
+				},
+				"pnger.RemovebgProcessLocation": {
+					"type": "string",
+					"default": "phone",
+					"enum": [
+						"vscode",
+						"phone"
+					],
+					"markdownDescription": "Choose where do you want to run the background removal process `#TODO` ",
+					"enumDescriptions": [
+						"The background removal request will be send from VS Code",
+						"The background removal request will be send directly from the phone"
+					]
+				}
+			}
+		},
+		"commands": [
+			{
+				"command": "pnger.start",
+				"category": "PNGER",
+				"title": "Start PNGER"
+			},
+			{
+				"command": "pnger.stop",
+				"category": "PNGER",
+				"title": "Stop PNGER"
+			}
+		]
+	},
+	"scripts": {
+		"lint": "eslint .",
+		"pretest": "npm run lint",
+		"test": "node ./test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.51.0",
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.0",
+		"@types/node": "^12.11.7",
+		"eslint": "^7.9.0",
+		"glob": "^7.1.6",
+		"mocha": "^8.1.3",
+		"typescript": "^4.0.2",
+		"vscode-test": "^1.4.0"
+	}
+}
